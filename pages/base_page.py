@@ -8,10 +8,6 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    # @allure.step('Загружаем страницу')
-    # def get_url(self, url):
-    #     self.driver.get(url)
-
     @allure.step('Получаем элемент')
     def find_element(self, locator):
         element = self.driver.find_element(*locator)
@@ -19,22 +15,17 @@ class BasePage:
 
     @allure.step('Ожидаем, что элемент появился на странице и его видно')
     def find_and_wait_element_until_visible(self, locator):
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 12).until(EC.visibility_of_element_located(locator))
         return self.find_element(locator)
 
     @allure.step('Ожидаем, что элемент на странице кликабелен')
     def find_and_wait_element_until_clickable(self, locator):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
+        WebDriverWait(self.driver, 12).until(EC.element_to_be_clickable(locator))
         return self.find_element(locator)
 
     @allure.step('Кликаем по элементу')
     def click_element(self, locator):
         self.find_element(locator).click()
-
-    @allure.step('Получаем текст элемента')
-    def get_element_text(self, locator):
-        element = self.find_element(locator)
-        return element.text
 
     @allure.step('Вводим текст в элемент')
     def set_text_to_element(self, locator, text):

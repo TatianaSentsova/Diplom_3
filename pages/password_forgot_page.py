@@ -9,11 +9,6 @@ class PasswordForgotPageStellarBurgers(BasePage):
     def wait_password_forgot_page(self):
         self.find_and_wait_element_until_visible(PasswordLock.HEADER_PASSWORD_FORGOT_FORM)
 
-    # @allure.step('Получаем текст заголовка формы восстановления пароля')
-    # def get_header_password_forgot_form_text(self):
-    #     self.wait_password_forgot_page()
-    #     return self.get_element_text(PasswordLock.HEADER_PASSWORD_FORGOT_FORM)
-
     @allure.step('Вводим текст в поле email формы восстановления пароля')
     def set_email(self):
         self.find_and_wait_element_until_clickable(PasswordLock.USER_EMAIL_FIELD)
@@ -23,11 +18,6 @@ class PasswordForgotPageStellarBurgers(BasePage):
     def click_recovery_button(self):
         self.find_and_wait_element_until_clickable(PasswordLock.RECOVERY_BUTTON)
         self.click_element(PasswordLock.RECOVERY_BUTTON)
-
-    # @allure.step('Получаем плейсхолдер поля с кодом с формы сброса пароля')
-    # def get_code_field_text(self):
-    #     self.find_and_wait_element_until_clickable(PasswordLock.CODE_FIELD)
-    #     return self.get_element_text(PasswordLock.CODE_FIELD)
 
     @allure.step('Кликаем по кнопке "Показать/скрыть пароль"')
     def click_show_or_hide_password_button(self):

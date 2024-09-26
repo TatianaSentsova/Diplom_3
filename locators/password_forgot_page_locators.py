@@ -9,8 +9,6 @@ class PasswordForgotPageLocators:
     # Кнопка "Восстановить" на странице восстановления пароля
     RECOVERY_BUTTON = (By.XPATH, ".//button[text() = 'Восстановить']")
     # # Поле с кодом в форме восстановления пароля
-    # CODE_FIELD = (By.XPATH, ".//div[contains(@class, 'input_type_text')]/label")
-    # Кнопка "Показать/скрыть" пароль
     SHOW_OR_HIDE_PASSWORD_BUTTON = (By.XPATH, ".//div[contains(@class, 'input__icon-action')]")
     # Поле "Пароль" в активном состоянии
     PASSWORD_FIELD_ACTIVE = (By.CSS_SELECTOR, '.input.input_status_active')

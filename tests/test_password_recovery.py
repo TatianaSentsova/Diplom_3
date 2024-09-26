@@ -3,7 +3,7 @@ from testdata import ApplicationData
 
 
 class TestPasswordRecovery:
-    @allure.title('Проверяем переход на страницу восстановления пароля по кнопке "Восстановить пароль"')
+    @allure.title('Проверяем переход на страницу восстановления пароля по клику на кнопке "Восстановить пароль"')
     def test_open_forgot_password_by_password_recovery_button(self, driver, landing_page,
                                                               login_page, password_forgot_page):
         landing_page.click_sign_in_button()
