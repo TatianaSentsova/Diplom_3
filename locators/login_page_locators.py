@@ -10,5 +10,7 @@ class LoginPageLocators:
     USER_PASSWORD_FIELD = (By.XPATH, ".//label[text() = 'Пароль']/following-sibling::input")
     # кнопка "Войти" в форме авторизации
     LOGIN_BUTTON = (By.XPATH, ".//button[text() = 'Войти']")
+    # кнопка "Конструктор" на странице авторизации
+    CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text() = 'Конструктор']")
 
 

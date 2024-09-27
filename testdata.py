@@ -9,3 +9,7 @@ class ApplicationData:
     ENDPOINT_LOGIN = '/api/auth/login'
     ENDPOINT_USER = '/api/auth/user'
 
+
+class MessageSuccess:
+    MAKE_BURGER = "Соберите бургер"
+    LIST_ORDER = "Лента заказов"

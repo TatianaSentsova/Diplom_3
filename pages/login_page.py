@@ -32,3 +32,9 @@ class LoginPageStellarBurgers(BasePage):
         self.set_email(email)
         self.set_password(password)
         self.click_login_button()
+
+    @allure.step('Кликаем по кнопке "Конструктор"')
+    def click_constructor_button(self):
+        self.find_and_wait_element_until_clickable(LoginLock.CONSTRUCTOR_BUTTON)
+        self.click_element(LoginLock.CONSTRUCTOR_BUTTON)
+
