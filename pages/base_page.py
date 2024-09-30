@@ -57,3 +57,7 @@ class BasePage:
     @allure.step('Проверить невидимость элемента')
     def check_invisibility(self, locator) -> object:
         return WebDriverWait(self.driver, 10).until(EC.invisibility_of_element(locator))
+
+    @allure.step('Подождать изменение текста элемента')
+    def wait_text_element_to_change(self, test_locator, value):
+        return WebDriverWait(self.driver, 15).until_not(EC.text_to_be_present_in_element(test_locator, value))

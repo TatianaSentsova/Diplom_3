@@ -8,7 +8,7 @@ from pages.main_page import MainPageStellarBurgers as Main
 from pages.login_page import LoginPageStellarBurgers as Login
 from pages.password_forgot_page import PasswordForgotPageStellarBurgers as PasswordForgot
 from pages.user_account_page import UserAccountPageStellarBurgers as UserAccount
-from pages.list_order_page import ListOrderPageStellarBurgers as ListOrder
+from pages.list_orders_page import ListOrdersPageStellarBurgers as ListOrder
 from utils import FakeData, Body, Request
 
 
@@ -50,9 +50,9 @@ def user_account_page(driver):
 
 
 @pytest.fixture
-def list_order_page(driver):
-    list_order_page = ListOrder(driver)
-    return list_order_page
+def list_orders_page(driver):
+    list_orders_page = ListOrder(driver)
+    return list_orders_page
 
 
 @allure.step('Создаем пользователя, получаем кортеж с токеном авторизации и данными пользователя')

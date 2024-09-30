@@ -37,10 +37,16 @@ class MainPageStellarBurgers(BasePage):
         self.find_and_wait_element_until_visible(MainLock.FLUORESCENT_BUN)
         self.click_element(MainLock.FLUORESCENT_BUN)
 
-    @allure.step('Закрываем окно с деталями ингредиента булки')
-    def close_popup_with_details_ingredient_bun(self):
-        self.find_and_wait_element_until_visible(MainLock.CLOSE_BUTTON)
-        self.click_element(MainLock.CLOSE_BUTTON)
+    @allure.step('Закрываем окно с деталями ингредиента')
+    def close_popup_with_ingredient_details(self):
+        self.find_and_wait_element_until_visible(MainLock.CLOSE_INGREDIENT)
+        self.click_element(MainLock.CLOSE_INGREDIENT)
+
+    @allure.step('Закрываем окно с деталями заказа')
+    def close_popup_with_order_details(self):
+        self.wait_text_element_to_change(MainLock.ID_ORDER, '9999')
+        self.find_and_wait_element_until_clickable(MainLock.CLOSE_ORDER_DETAILS)
+        self.click_element(MainLock.CLOSE_ORDER_DETAILS)
 
     @allure.step('Получаем число со счетчика ингредиента булки')
     def get_count_ingredient_bun(self):
@@ -74,6 +80,21 @@ class MainPageStellarBurgers(BasePage):
         return self.check_invisibility(MainLock.INGREDIENT_POPUP_TITLE)
 
     @allure.step('Проверяем, что появилось всплывающее окно с оформленным заказом')
-    def check_open_popup_with_details_order(self):
+    def check_open_popup_with_order(self):
         self.find_and_wait_element_until_visible(MainLock.ORDER_IS_PREPARING)
         return self.check_displaying_of_element(MainLock.ORDER_IS_PREPARING)
+
+    @allure.step('Получаем id заказа со всплывающего окна с оформленным заказом')
+    def get_id_order_in_popup(self):
+        self.wait_text_element_to_change(MainLock.ID_ORDER, '9999')
+        id_order = self.get_element_text(MainLock.ID_ORDER)
+        return f"0{id_order}"
+
+    @allure.step('Создать заказ')
+    def create_order(self):
+        self.wait_make_order_page()
+        self.move_ingredient_bun_to_constructor_burger()
+        self.click_make_order_button()
+        self.check_open_popup_with_order()
+        self.close_popup_with_order_details()
+
