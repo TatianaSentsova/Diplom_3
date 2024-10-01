@@ -3,7 +3,7 @@ from testdata import ApplicationData
 
 
 class TestUserAccount:
-    @allure.title('Проверяем переход в личный кабинет пользователя по клику по кнопке "Личный кабинет"')
+    @allure.title('Проверяем переход в личный кабинет пользователя по клику на кнопку "Личный кабинет"')
     def test_open_user_account(self, driver, main_page, login_page, user_account_page, authorized_user):
         main_page.click_sign_in_button()
         login_page.login_user(authorized_user.email, authorized_user.password)

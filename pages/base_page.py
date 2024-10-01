@@ -1,6 +1,7 @@
 import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from seletools.actions import drag_and_drop
 from selenium.webdriver import ActionChains
 
 
@@ -16,17 +17,19 @@ class BasePage:
 
     @allure.step('Ожидаем, что элемент появился на странице и его видно')
     def find_and_wait_element_until_visible(self, locator):
-        WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 20, poll_frequency=1).until(EC.visibility_of_element_located(locator))
         return self.find_element(locator)
 
     @allure.step('Ожидаем, что элемент на странице кликабелен')
     def find_and_wait_element_until_clickable(self, locator):
-        WebDriverWait(self.driver, 12).until(EC.element_to_be_clickable(locator))
+        WebDriverWait(self.driver, 20, poll_frequency=1).until(EC.element_to_be_clickable(locator))
         return self.find_element(locator)
 
     @allure.step('Кликаем по элементу')
-    def click_element(self, locator):
-        self.find_element(locator).click()
+    def click_element(self, test_locator):
+        target = self.find_element(test_locator)
+        click = ActionChains(self.driver)
+        click.move_to_element(target).click().perform()
 
     @allure.step('Вводим текст в элемент')
     def set_text_to_element(self, locator, text):
@@ -45,10 +48,19 @@ class BasePage:
         WebDriverWait(self.driver, 15).until_not(EC.visibility_of_element_located(locator))
 
     @allure.step('Перемещение элемента на другой элемент')
-    def move_element(self, element, target):
-        action_chains = ActionChains(self.driver)
-        action_chains.drag_and_drop(element, target)
-        action_chains.perform()
+    def move_element(self, locator_element, locator_target):
+        element = self.find_and_wait_element_until_visible(locator_element)
+        target = self.find_and_wait_element_until_visible(locator_target)
+        drag_and_drop(self.driver, element, target)
+
+    @allure.step('Подождать изменение текста элемента')
+    def wait_text_element_to_change(self, test_locator, value):
+        return WebDriverWait(self.driver, 15).until_not(EC.text_to_be_present_in_element(test_locator, value))
+
+    @allure.step('Скроллим до элмента')
+    def scroll_to_element(self, locator):
+        element = self.find_element(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     @allure.step('Проверить отображение элемента')
     def check_displaying_of_element(self, locator):
@@ -57,7 +69,3 @@ class BasePage:
     @allure.step('Проверить невидимость элемента')
     def check_invisibility(self, locator) -> object:
         return WebDriverWait(self.driver, 10).until(EC.invisibility_of_element(locator))
-
-    @allure.step('Подождать изменение текста элемента')
-    def wait_text_element_to_change(self, test_locator, value):
-        return WebDriverWait(self.driver, 15).until_not(EC.text_to_be_present_in_element(test_locator, value))

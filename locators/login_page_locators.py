@@ -12,5 +12,3 @@ class LoginPageLocators:
     LOGIN_BUTTON = (By.XPATH, ".//button[text() = 'Войти']")
     # кнопка "Конструктор" на странице авторизации
     CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text() = 'Конструктор']")
-
-

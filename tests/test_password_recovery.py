@@ -3,7 +3,7 @@ from testdata import ApplicationData
 
 
 class TestPasswordRecovery:
-    @allure.title('Проверяем переход на страницу восстановления пароля по клику на кнопке "Восстановить пароль"')
+    @allure.title('Проверяем переход на страницу восстановления пароля по клику на кнопку "Восстановить пароль"')
     def test_open_forgot_password_by_password_recovery_button(self, driver, main_page,
                                                               login_page, password_forgot_page):
         main_page.click_sign_in_button()
@@ -18,7 +18,6 @@ class TestPasswordRecovery:
                                                     login_page, password_forgot_page):
         main_page.click_sign_in_button()
         login_page.click_password_recovery_button()
-        password_forgot_page.wait_password_forgot_page()
         password_forgot_page.set_email()
         password_forgot_page.click_recovery_button()
         password_forgot_page.wait_save_button_clickable()
@@ -28,7 +27,8 @@ class TestPasswordRecovery:
     @allure.description('''Заполняем поле email в форме восстановления пароля, кликаем на кнопку "Восстановить", 
                             в форме сброса пароля кликаем по кнопке "Скрыть/показать пароль", проверяем,
                             что поле "Пароль" становится активным"''')
-    def test_active_password_field_by_show_hide_password_button(self, driver, main_page, login_page, password_forgot_page):
+    def test_active_password_field_by_show_hide_password_button(self, driver, main_page, login_page,
+                                                                password_forgot_page):
         main_page.click_sign_in_button()
         login_page.click_password_recovery_button()
         password_forgot_page.set_email()

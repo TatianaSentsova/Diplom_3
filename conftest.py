@@ -1,7 +1,8 @@
-from collections import namedtuple
-
 import pytest
-import allure
+from collections import namedtuple
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from selenium import webdriver
 from testdata import ApplicationData
 from pages.main_page import MainPageStellarBurgers as Main
@@ -12,14 +13,21 @@ from pages.list_orders_page import ListOrdersPageStellarBurgers as ListOrder
 from utils import FakeData, Body, Request
 
 
-@allure.step('Инициализируем драйвер')
 @pytest.fixture(params=['chrome', 'firefox'])
 def driver(request):
     driver = None
     if request.param == 'chrome':
-        driver = webdriver.Chrome()
+        options = Options()
+        options.add_argument('--incognito')
+        driver = webdriver.Chrome(options=options)
+        driver.set_window_size(1920, 1080)
     elif request.param == 'firefox':
-        driver = webdriver.Firefox()
+        firefox_options = webdriver.FirefoxOptions()
+        profile = FirefoxProfile()
+        profile.set_preference("browser.privatebrowsing.autostart", True)
+        firefox_options.profile = profile
+        driver = webdriver.Firefox(options=firefox_options)
+        driver.set_window_size(1920, 1080)
     driver.get(ApplicationData.STELLAR_BURGERS_URL)
     yield driver
     driver.quit()
@@ -55,7 +63,6 @@ def list_orders_page(driver):
     return list_orders_page
 
 
-@allure.step('Создаем пользователя, получаем кортеж с токеном авторизации и данными пользователя')
 @pytest.fixture
 def authorized_user():
     email = FakeData.email()

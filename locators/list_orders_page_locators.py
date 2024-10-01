@@ -14,7 +14,7 @@ class ListOrdersPageLocators:
     FIRST_ORDER_IN_LIST = (By.XPATH, ".//ul[contains(@class, 'OrderFeed_list')]/li[1]")
     # попап с деталями заказа на странице "Лента заказов"
     ORDER_POPUP_DETAILS = (By.XPATH, ".//p[text() = 'Cостав']/ancestor::div[contains(@class, 'container__Wo2l')]")
-    # кнопка "Конструктор" на странице авторизации
+    # кнопка "Конструктор"
     CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text() = 'Конструктор']")
     # заказ в разделе "В работе"
     ORDER_IN_PROCESSING = (By.XPATH, ".//ul[contains(@class, 'orderListReady')]/li[contains(@class, 'default mb-2')]")

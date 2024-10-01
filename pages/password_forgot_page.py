@@ -16,7 +16,7 @@ class PasswordForgotPageStellarBurgers(BasePage):
 
     @allure.step('Кликаем по кнопке "Восстановить"')
     def click_recovery_button(self):
-        self.find_and_wait_element_until_clickable(PasswordLock.RECOVERY_BUTTON)
+        self.scroll_to_element(PasswordLock.RECOVERY_BUTTON)
         self.click_element(PasswordLock.RECOVERY_BUTTON)
 
     @allure.step('Кликаем по кнопке "Показать/скрыть пароль"')
@@ -24,7 +24,7 @@ class PasswordForgotPageStellarBurgers(BasePage):
         self.find_and_wait_element_until_clickable(PasswordLock.SHOW_OR_HIDE_PASSWORD_BUTTON)
         self.click_element(PasswordLock.SHOW_OR_HIDE_PASSWORD_BUTTON)
 
-    @allure.step('Ожидаем пока кнопка "Сохранить" в станет кликабельна в форме сброса пароля')
+    @allure.step('Ожидаем пока кнопка "Сохранить" станет кликабельна в форме сброса пароля')
     def wait_save_button_clickable(self):
         self.find_and_wait_element_until_clickable(PasswordLock.SAVE_BUTTON)
 

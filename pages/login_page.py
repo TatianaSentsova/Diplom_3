@@ -37,4 +37,3 @@ class LoginPageStellarBurgers(BasePage):
     def click_constructor_button(self):
         self.find_and_wait_element_until_clickable(LoginLock.CONSTRUCTOR_BUTTON)
         self.click_element(LoginLock.CONSTRUCTOR_BUTTON)
-

@@ -37,6 +37,7 @@ class Body:
                            "password": password}
         return login_pass_body
 
+
 class Request:
     @staticmethod
     def create_user(body_user):
